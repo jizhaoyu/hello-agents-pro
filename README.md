@@ -64,7 +64,7 @@ python -m venv .venv
 ## 项目结构
 
 ```text
-├── notes/                  # 16 章 Markdown 学习笔记
+├── notes/                  # 16 章 Markdown 学习笔记 与hello-agents 的ppt一一对应
 ├── assets/screenshots/     # README 界面预览图
 ├── code/super_agent.py     # 纯本地学习助手
 ├── web_demo/
