@@ -1,6 +1,27 @@
 # Hello Agents Pro
 
-一个本地优先的智能体个人学习网站，内容来自 16 章 Markdown 学习笔记，并提供五阶段学习路线、全文阅读器、学习进度和纯本地学习助手。
+一个本地优先的智能体个人学习网站：把 16 章 Markdown 笔记整理成可搜索、可阅读、可实践、可持续积累的个人知识档案。
+
+![Hello Agents Pro 桌面端首页](assets/screenshots/home-desktop.png)
+
+## 界面预览
+
+### 沉浸式章节阅读
+
+自动生成章内目录、阅读数据与上下章导航，让长篇 Markdown 笔记更适合持续学习。
+
+![第八章记忆与检索阅读界面](assets/screenshots/chapter-reader.png)
+
+<details>
+<summary><strong>查看移动端知识档案</strong></summary>
+
+<br>
+
+在手机上也可以搜索、筛选和阅读全部章节。
+
+<img src="assets/screenshots/archive-mobile.png" alt="移动端知识档案列表" width="375">
+
+</details>
 
 ## 功能
 
@@ -44,6 +65,7 @@ python -m venv .venv
 
 ```text
 ├── notes/                  # 16 章 Markdown 学习笔记
+├── assets/screenshots/     # README 界面预览图
 ├── code/super_agent.py     # 纯本地学习助手
 ├── web_demo/
 │   ├── frontend/index.html # 单页前端
