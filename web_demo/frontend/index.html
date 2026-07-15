@@ -1,0 +1,2224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="个人智能体学习档案：16 章系统笔记、五阶段学习路线与超级智能体实践工作台。">
+    <link rel="icon" href="data:,">
+    <title>智能体学习档案｜个人学习网站</title>
+    <style>
+        :root {
+            --paper: #f2efe7;
+            --paper-deep: #e7e1d4;
+            --ink: #171717;
+            --muted: #666259;
+            --line: #c9c2b5;
+            --blue: #1546d8;
+            --blue-dark: #0c2e92;
+            --orange: #ef5b2a;
+            --lime: #dfff4f;
+            --white: #fffdf7;
+            --black: #11100e;
+            --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, serif;
+            --sans: "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+            --mono: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+            --page: min(1440px, calc(100vw - 48px));
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-width: 320px;
+            color: var(--ink);
+            background:
+                linear-gradient(rgba(23, 23, 23, 0.035) 1px, transparent 1px),
+                var(--paper);
+            background-size: 100% 32px;
+            font-family: var(--sans);
+            line-height: 1.65;
+        }
+
+        body.reader-open {
+            overflow: hidden;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::selection {
+            color: var(--white);
+            background: var(--blue);
+        }
+
+        .skip-link {
+            position: fixed;
+            z-index: 1000;
+            top: 10px;
+            left: 10px;
+            padding: 8px 12px;
+            color: var(--white);
+            background: var(--black);
+            transform: translateY(-180%);
+        }
+
+        .skip-link:focus {
+            transform: translateY(0);
+        }
+
+        .site-header {
+            position: sticky;
+            z-index: 40;
+            top: 0;
+            border-bottom: 1px solid var(--ink);
+            background: rgba(242, 239, 231, 0.94);
+            backdrop-filter: blur(14px);
+        }
+
+        .nav-shell {
+            width: var(--page);
+            min-height: 72px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+        }
+
+        .brand-mark {
+            width: 30px;
+            height: 30px;
+            display: grid;
+            place-items: center;
+            color: var(--white);
+            background: var(--blue);
+            font-family: var(--mono);
+            font-size: 0.76rem;
+            transform: rotate(-4deg);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            font-size: 0.84rem;
+            font-weight: 700;
+        }
+
+        .nav-links a {
+            position: relative;
+        }
+
+        .nav-links a::after {
+            position: absolute;
+            right: 0;
+            bottom: -6px;
+            left: 0;
+            height: 2px;
+            content: "";
+            background: var(--blue);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 180ms ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a:focus-visible::after {
+            transform: scaleX(1);
+        }
+
+        .nav-actions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #17a85b;
+            box-shadow: 0 0 0 4px rgba(23, 168, 91, 0.13);
+        }
+
+        .nav-status {
+            color: var(--muted);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        .icon-button {
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            background: transparent;
+            cursor: pointer;
+            transition: color 160ms ease, background 160ms ease, transform 160ms ease;
+        }
+
+        .icon-button:hover {
+            color: var(--white);
+            background: var(--ink);
+            transform: translateY(-2px);
+        }
+
+        main {
+            overflow: hidden;
+        }
+
+        .hero {
+            width: var(--page);
+            min-height: calc(100vh - 72px);
+            margin: 0 auto;
+            padding: clamp(56px, 8vw, 112px) 0 70px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.55fr) minmax(290px, 0.65fr);
+            gap: clamp(36px, 7vw, 100px);
+            align-items: center;
+        }
+
+        .eyebrow {
+            margin: 0 0 22px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--blue);
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            width: 48px;
+            height: 3px;
+            content: "";
+            background: currentColor;
+        }
+
+        .hero-title {
+            max-width: 980px;
+            margin: 0;
+            font-family: var(--serif);
+            font-size: clamp(4.25rem, 9.8vw, 9.4rem);
+            font-weight: 900;
+            letter-spacing: -0.075em;
+            line-height: 0.86;
+        }
+
+        .hero-title .outline {
+            color: transparent;
+            -webkit-text-stroke: 2px var(--ink);
+        }
+
+        .hero-title .slash {
+            color: var(--orange);
+            font-family: var(--sans);
+        }
+
+        .hero-intro {
+            max-width: 710px;
+            margin: 36px 0 0;
+            display: grid;
+            grid-template-columns: 90px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .hero-index {
+            padding-top: 4px;
+            border-top: 1px solid var(--ink);
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .hero-copy {
+            margin: 0;
+            font-size: clamp(1rem, 1.6vw, 1.22rem);
+            line-height: 1.85;
+        }
+
+        .hero-copy strong {
+            color: var(--blue);
+        }
+
+        .hero-actions {
+            margin-top: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .button {
+            min-height: 48px;
+            padding: 12px 18px;
+            border: 1px solid var(--ink);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 0.84rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: color 160ms ease, background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+        }
+
+        .button.primary {
+            color: var(--white);
+            background: var(--blue);
+            border-color: var(--blue);
+            box-shadow: 6px 6px 0 var(--ink);
+        }
+
+        .button.secondary {
+            color: var(--ink);
+            background: transparent;
+        }
+
+        .button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--orange);
+        }
+
+        .hero-ledger {
+            position: relative;
+            padding: 26px;
+            color: var(--white);
+            background: var(--blue);
+            box-shadow: 14px 14px 0 var(--orange);
+            transform: rotate(1.3deg);
+        }
+
+        .hero-ledger::before {
+            position: absolute;
+            top: -18px;
+            left: 34px;
+            width: 70px;
+            height: 30px;
+            content: "";
+            background: rgba(223, 255, 79, 0.82);
+            transform: rotate(-4deg);
+        }
+
+        .ledger-label {
+            margin: 0 0 34px;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.14em;
+        }
+
+        .ledger-number {
+            margin: 0;
+            font-family: var(--serif);
+            font-size: clamp(5rem, 11vw, 8rem);
+            font-weight: 900;
+            letter-spacing: -0.09em;
+            line-height: 0.75;
+        }
+
+        .ledger-caption {
+            margin: 18px 0 30px;
+            color: #d9e2ff;
+            font-size: 0.84rem;
+        }
+
+        .progress-track {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .progress-value {
+            width: 0;
+            height: 100%;
+            background: var(--lime);
+            transition: width 500ms cubic-bezier(.2, .8, .2, 1);
+        }
+
+        .ledger-meta {
+            margin-top: 13px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+        }
+
+        .ticker {
+            border-top: 1px solid var(--ink);
+            border-bottom: 1px solid var(--ink);
+            color: var(--white);
+            background: var(--black);
+            overflow: hidden;
+        }
+
+        .ticker-track {
+            width: max-content;
+            padding: 12px 0;
+            display: flex;
+            gap: 34px;
+            font-family: var(--mono);
+            font-size: 0.73rem;
+            letter-spacing: 0.1em;
+            animation: ticker 30s linear infinite;
+        }
+
+        .ticker-track span::before {
+            margin-right: 34px;
+            color: var(--lime);
+            content: "✦";
+        }
+
+        @keyframes ticker {
+            to { transform: translateX(-50%); }
+        }
+
+        .section-shell {
+            width: var(--page);
+            margin: 0 auto;
+            padding: clamp(80px, 10vw, 144px) 0;
+        }
+
+        .section-heading {
+            margin-bottom: 54px;
+            display: grid;
+            grid-template-columns: 1fr minmax(280px, 0.58fr);
+            gap: 44px;
+            align-items: end;
+        }
+
+        .section-kicker {
+            margin: 0 0 14px;
+            color: var(--orange);
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+        }
+
+        .section-title {
+            margin: 0;
+            font-family: var(--serif);
+            font-size: clamp(2.7rem, 6.2vw, 6rem);
+            letter-spacing: -0.055em;
+            line-height: 0.98;
+        }
+
+        .section-note {
+            margin: 0;
+            padding-left: 22px;
+            border-left: 3px solid var(--blue);
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .roadmap {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            border-top: 1px solid var(--ink);
+            border-bottom: 1px solid var(--ink);
+        }
+
+        .roadmap::before {
+            position: absolute;
+            top: 73px;
+            right: 0;
+            left: 0;
+            height: 1px;
+            content: "";
+            background: var(--line);
+        }
+
+        .phase-card {
+            position: relative;
+            min-height: 355px;
+            padding: 22px;
+            border-right: 1px solid var(--ink);
+            display: flex;
+            flex-direction: column;
+            transition: color 200ms ease, background 200ms ease;
+        }
+
+        .phase-card:last-child {
+            border-right: 0;
+        }
+
+        .phase-card:hover {
+            color: var(--white);
+            background: var(--blue);
+        }
+
+        .phase-card:hover .phase-description,
+        .phase-card:hover .phase-range {
+            color: #d9e2ff;
+        }
+
+        .phase-top {
+            height: 52px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            font-weight: 700;
+        }
+
+        .phase-node {
+            position: relative;
+            z-index: 1;
+            width: 15px;
+            height: 15px;
+            margin: -7px 0 34px;
+            border: 3px solid var(--paper);
+            border-radius: 50%;
+            background: var(--orange);
+            box-shadow: 0 0 0 1px var(--ink);
+        }
+
+        .phase-number {
+            margin: 0 0 26px;
+            font-family: var(--serif);
+            font-size: 4.8rem;
+            font-weight: 900;
+            letter-spacing: -0.08em;
+            line-height: 0.75;
+        }
+
+        .phase-name {
+            margin: 0;
+            font-size: 1.14rem;
+            font-weight: 900;
+        }
+
+        .phase-description {
+            margin: 12px 0 0;
+            color: var(--muted);
+            font-size: 0.82rem;
+            line-height: 1.7;
+        }
+
+        .phase-range {
+            margin-top: auto;
+            padding-top: 24px;
+            color: var(--muted);
+            font-family: var(--mono);
+            font-size: 0.68rem;
+        }
+
+        .archive-section {
+            color: var(--white);
+            background: var(--black);
+        }
+
+        .archive-section .section-note {
+            color: #aaa59a;
+            border-color: var(--lime);
+        }
+
+        .archive-tools {
+            margin-bottom: 28px;
+            display: grid;
+            grid-template-columns: minmax(240px, 1fr) auto;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .search-box {
+            min-height: 56px;
+            border-bottom: 1px solid #4d4a43;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .search-box input {
+            width: 100%;
+            border: 0;
+            outline: 0;
+            color: var(--white);
+            background: transparent;
+        }
+
+        .search-box input::placeholder {
+            color: #747068;
+        }
+
+        .shortcut {
+            padding: 3px 7px;
+            border: 1px solid #4d4a43;
+            color: #8f8b82;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+        }
+
+        .filter-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .filter-button {
+            min-height: 36px;
+            padding: 7px 12px;
+            border: 1px solid #4d4a43;
+            color: #aaa59a;
+            background: transparent;
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .filter-button:hover,
+        .filter-button.active {
+            color: var(--black);
+            background: var(--lime);
+            border-color: var(--lime);
+        }
+
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            border-top: 1px solid #3e3b36;
+            border-left: 1px solid #3e3b36;
+        }
+
+        .chapter-card {
+            position: relative;
+            min-height: 330px;
+            padding: 24px;
+            border-right: 1px solid #3e3b36;
+            border-bottom: 1px solid #3e3b36;
+            display: flex;
+            flex-direction: column;
+            color: var(--white);
+            background: transparent;
+            cursor: pointer;
+            overflow: hidden;
+            transition: background 180ms ease, transform 180ms ease;
+        }
+
+        .chapter-card::after {
+            position: absolute;
+            right: -45px;
+            bottom: -60px;
+            width: 150px;
+            height: 150px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 50%;
+            content: "";
+            transition: transform 260ms ease, background 260ms ease;
+        }
+
+        .chapter-card:hover,
+        .chapter-card:focus-visible {
+            z-index: 1;
+            outline: 0;
+            background: var(--blue);
+            transform: translateY(-5px);
+        }
+
+        .chapter-card:hover::after {
+            background: var(--orange);
+            transform: scale(1.35);
+        }
+
+        .chapter-card.complete::before {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 5px 9px;
+            color: var(--black);
+            background: var(--lime);
+            content: "已完成 ✓";
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            font-weight: 800;
+        }
+
+        .chapter-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            color: #8f8b82;
+            font-family: var(--mono);
+            font-size: 0.64rem;
+        }
+
+        .chapter-number {
+            margin: 28px 0 18px;
+            color: var(--orange);
+            font-family: var(--serif);
+            font-size: 4.3rem;
+            font-weight: 900;
+            letter-spacing: -0.08em;
+            line-height: 0.75;
+        }
+
+        .chapter-title {
+            margin: 0;
+            font-family: var(--serif);
+            font-size: 1.34rem;
+            letter-spacing: -0.03em;
+            line-height: 1.35;
+        }
+
+        .chapter-summary {
+            margin: 14px 0 0;
+            color: #aaa59a;
+            display: -webkit-box;
+            overflow: hidden;
+            font-size: 0.78rem;
+            line-height: 1.75;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+        }
+
+        .chapter-card:hover .chapter-summary,
+        .chapter-card:hover .chapter-meta {
+            color: #d9e2ff;
+        }
+
+        .chapter-footer {
+            margin-top: auto;
+            padding-top: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 12px;
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            padding: 80px 24px;
+            color: #aaa59a;
+            text-align: center;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr 0.8fr;
+            gap: 18px;
+        }
+
+        .project-card {
+            min-height: 360px;
+            padding: 28px;
+            border: 1px solid var(--ink);
+            display: flex;
+            flex-direction: column;
+            background: var(--white);
+        }
+
+        .project-card.featured {
+            color: var(--white);
+            background: var(--blue);
+            box-shadow: 10px 10px 0 var(--orange);
+        }
+
+        .project-index {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        .project-symbol {
+            margin: 36px 0 24px;
+            font-family: var(--serif);
+            font-size: 4.2rem;
+            font-weight: 900;
+            line-height: 0.8;
+        }
+
+        .project-card h3 {
+            margin: 0;
+            font-family: var(--serif);
+            font-size: 1.55rem;
+        }
+
+        .project-card p {
+            margin: 14px 0 0;
+            color: var(--muted);
+            font-size: 0.84rem;
+        }
+
+        .project-card.featured p {
+            color: #d9e2ff;
+        }
+
+        .project-link {
+            margin-top: auto;
+            padding-top: 30px;
+            font-size: 0.76rem;
+            font-weight: 900;
+        }
+
+        .assistant-section {
+            position: relative;
+            color: var(--white);
+            background: var(--blue);
+            overflow: hidden;
+        }
+
+        .assistant-section::after {
+            position: absolute;
+            right: -10vw;
+            bottom: -25vw;
+            width: 55vw;
+            height: 55vw;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 50%;
+            content: "";
+            box-shadow: 0 0 0 7vw rgba(255, 255, 255, 0.04), 0 0 0 14vw rgba(255, 255, 255, 0.035);
+        }
+
+        .assistant-layout {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 0.72fr 1.28fr;
+            gap: clamp(40px, 8vw, 120px);
+            align-items: start;
+        }
+
+        .assistant-title {
+            margin: 0;
+            font-family: var(--serif);
+            font-size: clamp(3.2rem, 7vw, 7rem);
+            letter-spacing: -0.065em;
+            line-height: 0.9;
+        }
+
+        .assistant-copy {
+            max-width: 450px;
+            margin: 28px 0 0;
+            color: #d9e2ff;
+        }
+
+        .capability-chips {
+            margin-top: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .capability-chip {
+            padding: 6px 9px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            font-family: var(--mono);
+            font-size: 0.64rem;
+        }
+
+        .chat-console {
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(9, 25, 86, 0.42);
+            box-shadow: 12px 12px 0 var(--orange);
+        }
+
+        .chat-head {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+        }
+
+        .chat-messages {
+            height: 360px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            overflow-y: auto;
+        }
+
+        .message {
+            max-width: 88%;
+            padding: 13px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #edf1ff;
+            background: rgba(255, 255, 255, 0.07);
+            font-size: 0.84rem;
+            white-space: pre-wrap;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            color: var(--black);
+            background: var(--lime);
+            border-color: var(--lime);
+        }
+
+        .message-label {
+            margin-bottom: 6px;
+            display: block;
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            font-weight: 800;
+            opacity: 0.7;
+        }
+
+        .quick-prompts {
+            padding: 0 16px 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .quick-prompt {
+            padding: 5px 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #d9e2ff;
+            background: transparent;
+            font-size: 0.65rem;
+            cursor: pointer;
+        }
+
+        .quick-prompt:hover {
+            color: var(--black);
+            background: var(--lime);
+        }
+
+        .chat-form {
+            padding: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.35);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+        }
+
+        .chat-form textarea {
+            min-height: 54px;
+            max-height: 130px;
+            padding: 14px;
+            border: 0;
+            outline: 0;
+            resize: vertical;
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .chat-form textarea::placeholder {
+            color: #aebce8;
+        }
+
+        .send-button {
+            min-width: 88px;
+            border: 0;
+            color: var(--black);
+            background: var(--lime);
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .send-button:disabled {
+            opacity: 0.55;
+            cursor: wait;
+        }
+
+        .site-footer {
+            color: var(--white);
+            background: var(--black);
+        }
+
+        .footer-shell {
+            width: var(--page);
+            margin: 0 auto;
+            padding: 42px 0;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 32px;
+            align-items: end;
+        }
+
+        .footer-title {
+            margin: 0;
+            font-family: var(--serif);
+            font-size: clamp(2rem, 4vw, 4rem);
+            letter-spacing: -0.05em;
+        }
+
+        .footer-meta {
+            color: #8f8b82;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            text-align: right;
+        }
+
+        .reader {
+            position: fixed;
+            z-index: 100;
+            inset: 0;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            color: var(--ink);
+            background: var(--paper);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(24px);
+            transition: opacity 200ms ease, transform 240ms ease;
+        }
+
+        .reader.open {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .reader-topbar {
+            min-height: 68px;
+            padding: 0 22px;
+            border-bottom: 1px solid var(--ink);
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 16px;
+            align-items: center;
+            background: var(--paper);
+        }
+
+        .reader-breadcrumb {
+            overflow: hidden;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .reader-progress {
+            color: var(--blue);
+            font-family: var(--mono);
+            font-size: 0.66rem;
+            font-weight: 800;
+        }
+
+        .reader-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .reader-layout {
+            min-height: 0;
+            display: grid;
+            grid-template-columns: 260px minmax(0, 1fr) 220px;
+        }
+
+        .reader-toc,
+        .reader-aside {
+            min-height: 0;
+            padding: 28px 22px;
+            overflow-y: auto;
+        }
+
+        .reader-toc {
+            border-right: 1px solid var(--line);
+        }
+
+        .reader-aside {
+            border-left: 1px solid var(--line);
+        }
+
+        .aside-label {
+            margin: 0 0 20px;
+            color: var(--blue);
+            font-family: var(--mono);
+            font-size: 0.64rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+        }
+
+        .toc-list {
+            display: grid;
+            gap: 2px;
+        }
+
+        .toc-link {
+            padding: 7px 0;
+            color: var(--muted);
+            font-size: 0.74rem;
+            line-height: 1.45;
+        }
+
+        .toc-link.level-3 {
+            padding-left: 14px;
+            font-size: 0.68rem;
+        }
+
+        .toc-link:hover {
+            color: var(--blue);
+        }
+
+        .reader-scroll {
+            min-height: 0;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .article {
+            width: min(780px, calc(100% - 64px));
+            margin: 0 auto;
+            padding: 70px 0 110px;
+        }
+
+        .article > h1:first-child {
+            margin-top: 0;
+            font-family: var(--serif);
+            font-size: clamp(2.7rem, 6vw, 5.7rem);
+            letter-spacing: -0.06em;
+            line-height: 1.03;
+        }
+
+        .article h2 {
+            margin: 70px 0 24px;
+            padding-top: 16px;
+            border-top: 3px solid var(--ink);
+            font-family: var(--serif);
+            font-size: 2rem;
+            letter-spacing: -0.04em;
+            line-height: 1.25;
+        }
+
+        .article h3 {
+            margin: 42px 0 16px;
+            color: var(--blue);
+            font-size: 1.25rem;
+        }
+
+        .article h4 {
+            margin: 32px 0 12px;
+            font-size: 1rem;
+        }
+
+        .article p,
+        .article li {
+            font-family: var(--serif);
+            font-size: 1.02rem;
+            line-height: 1.95;
+        }
+
+        .article strong {
+            text-decoration: underline;
+            text-decoration-color: rgba(239, 91, 42, 0.45);
+            text-decoration-thickness: 5px;
+            text-underline-offset: -2px;
+        }
+
+        .article blockquote {
+            margin: 28px 0;
+            padding: 20px 24px;
+            border-left: 5px solid var(--orange);
+            background: var(--white);
+            font-family: var(--serif);
+        }
+
+        .article pre {
+            position: relative;
+            margin: 28px 0;
+            padding: 42px 22px 22px;
+            color: #eff3ff;
+            background: #151b2d;
+            overflow-x: auto;
+            font-family: var(--mono);
+            font-size: 0.82rem;
+            line-height: 1.75;
+            tab-size: 4;
+        }
+
+        .article pre::before {
+            position: absolute;
+            top: 12px;
+            left: 18px;
+            color: #7d8bb5;
+            content: attr(data-language);
+            font-size: 0.62rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .copy-code {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 5px 8px;
+            border: 1px solid #3a4565;
+            color: #b7c1df;
+            background: transparent;
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            cursor: pointer;
+        }
+
+        .article code:not(pre code) {
+            padding: 2px 5px;
+            color: var(--blue-dark);
+            background: #dfe5f7;
+            font-family: var(--mono);
+            font-size: 0.82em;
+        }
+
+        .table-wrap {
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .article table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+
+        .article th,
+        .article td {
+            padding: 11px 12px;
+            border: 1px solid var(--line);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .article th {
+            color: var(--white);
+            background: var(--blue);
+        }
+
+        .article hr {
+            margin: 50px 0;
+            border: 0;
+            border-top: 1px solid var(--ink);
+        }
+
+        .article ul,
+        .article ol {
+            padding-left: 1.4em;
+        }
+
+        .reader-stat {
+            padding: 14px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .reader-stat strong {
+            display: block;
+            font-family: var(--serif);
+            font-size: 1.6rem;
+        }
+
+        .reader-stat span {
+            color: var(--muted);
+            font-size: 0.7rem;
+        }
+
+        .reader-nav {
+            margin-top: 24px;
+            display: grid;
+            gap: 8px;
+        }
+
+        .reader-nav button {
+            min-height: 42px;
+            padding: 8px 10px;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            background: transparent;
+            font-size: 0.72rem;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .reader-nav button:hover:not(:disabled) {
+            color: var(--white);
+            background: var(--blue);
+            border-color: var(--blue);
+        }
+
+        .reader-nav button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .complete-button {
+            width: 100%;
+            min-height: 48px;
+            margin-top: 18px;
+            border: 0;
+            color: var(--white);
+            background: var(--blue);
+            font-size: 0.76rem;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .complete-button.done {
+            color: var(--black);
+            background: var(--lime);
+        }
+
+        .loading-screen {
+            position: fixed;
+            z-index: 200;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            color: var(--white);
+            background: var(--blue);
+            transition: opacity 360ms ease, visibility 360ms ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-mark {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 900;
+            letter-spacing: -0.07em;
+            animation: pulse 900ms ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            to { opacity: 0.35; transform: scale(0.98); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 600ms ease, transform 600ms cubic-bezier(.2, .8, .2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 1100px) {
+            .nav-shell {
+                grid-template-columns: 1fr auto;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr 320px;
+                gap: 44px;
+            }
+
+            .hero-title {
+                font-size: clamp(4rem, 10vw, 7.4rem);
+            }
+
+            .roadmap {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .phase-card:nth-child(3) {
+                border-right: 0;
+            }
+
+            .phase-card:nth-child(n+4) {
+                border-top: 1px solid var(--ink);
+            }
+
+            .chapter-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .reader-layout {
+                grid-template-columns: minmax(0, 1fr) 200px;
+            }
+
+            .reader-toc {
+                display: none;
+            }
+        }
+
+        @media (max-width: 780px) {
+            :root {
+                --page: calc(100vw - 28px);
+            }
+
+            .nav-shell {
+                min-height: 62px;
+            }
+
+            .nav-status,
+            .status-dot {
+                display: none;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 70px 0 84px;
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: clamp(4rem, 22vw, 7rem);
+            }
+
+            .hero-ledger {
+                width: min(360px, calc(100% - 18px));
+                margin-left: auto;
+            }
+
+            .section-heading,
+            .assistant-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .roadmap {
+                grid-template-columns: 1fr;
+            }
+
+            .roadmap::before {
+                display: none;
+            }
+
+            .phase-card,
+            .phase-card:nth-child(3),
+            .phase-card:nth-child(n+4) {
+                min-height: auto;
+                border-top: 0;
+                border-right: 0;
+                border-bottom: 1px solid var(--ink);
+            }
+
+            .phase-node {
+                display: none;
+            }
+
+            .phase-number {
+                margin-top: 18px;
+            }
+
+            .phase-range {
+                margin-top: 28px;
+            }
+
+            .archive-tools {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-list {
+                justify-content: flex-start;
+            }
+
+            .chapter-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                min-height: 300px;
+            }
+
+            .assistant-layout {
+                gap: 48px;
+            }
+
+            .reader-topbar {
+                min-height: 60px;
+                grid-template-columns: 1fr auto;
+            }
+
+            .reader-progress {
+                display: none;
+            }
+
+            .reader-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .reader-aside {
+                display: none;
+            }
+
+            .article {
+                width: min(100% - 32px, 720px);
+                padding-top: 44px;
+            }
+
+            .footer-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-meta {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .brand-text {
+                font-size: 0.82rem;
+            }
+
+            .hero-intro {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .hero-index {
+                width: 70px;
+            }
+
+            .chapter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chapter-card {
+                min-height: 300px;
+            }
+
+            .chat-form {
+                grid-template-columns: 1fr;
+            }
+
+            .send-button {
+                min-height: 45px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#archive">跳到学习档案</a>
+    <div class="loading-screen" id="loadingScreen" aria-live="polite">
+        <div class="loading-mark">学习 / LOADING</div>
+    </div>
+
+    <header class="site-header">
+        <nav class="nav-shell" aria-label="主导航">
+            <a class="brand" href="#home" aria-label="返回首页">
+                <span class="brand-mark">AI</span>
+                <span class="brand-text">个人学习档案</span>
+            </a>
+            <div class="nav-links">
+                <a href="#roadmap">学习路线</a>
+                <a href="#archive">知识档案</a>
+                <a href="#practice">实践项目</a>
+                <a href="#assistant">学习助手</a>
+            </div>
+            <div class="nav-actions">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span class="nav-status">LOCAL KNOWLEDGE · ONLINE</span>
+                <button class="icon-button" id="searchTrigger" type="button" aria-label="搜索笔记">⌕</button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="home">
+        <section class="hero" aria-labelledby="heroTitle">
+            <div class="hero-main reveal">
+                <p class="eyebrow">Personal knowledge archive · 2026</p>
+                <h1 class="hero-title" id="heroTitle">
+                    智能体<br><span class="outline">学习档案</span><span class="slash">/</span>
+                </h1>
+                <div class="hero-intro">
+                    <span class="hero-index">INDEX<br>001—016</span>
+                    <div>
+                        <p class="hero-copy">从智能体的第一性原理，到记忆、上下文、多智能体协作与毕业设计。这里不是课程目录，而是我的<strong>可检索、可实践、持续生长</strong>的知识现场。</p>
+                        <div class="hero-actions">
+                            <a class="button primary" href="#archive">进入知识档案 <span>↘</span></a>
+                            <a class="button secondary" href="#roadmap">查看学习路线 <span>→</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <aside class="hero-ledger reveal" aria-label="学习进度">
+                <p class="ledger-label">LEARNING LEDGER / 学习台账</p>
+                <p class="ledger-number"><span id="completedCount">0</span><small style="font-size:.32em"> / </small><span id="chapterCount">16</span></p>
+                <p class="ledger-caption">章节已标记完成 · 进度保存在当前浏览器</p>
+                <div class="progress-track" aria-hidden="true"><div class="progress-value" id="progressValue"></div></div>
+                <div class="ledger-meta">
+                    <span id="progressPercent">0% COMPLETE</span>
+                    <span id="readingTime">— MIN READ</span>
+                </div>
+            </aside>
+        </section>
+
+        <div class="ticker" aria-hidden="true">
+            <div class="ticker-track">
+                <span>AGENT FOUNDATIONS</span><span>REACT</span><span>MEMORY + RAG</span><span>CONTEXT ENGINEERING</span><span>MULTI-AGENT</span><span>AGENTIC RL</span><span>EVALUATION</span><span>FIELD PROJECTS</span>
+                <span>AGENT FOUNDATIONS</span><span>REACT</span><span>MEMORY + RAG</span><span>CONTEXT ENGINEERING</span><span>MULTI-AGENT</span><span>AGENTIC RL</span><span>EVALUATION</span><span>FIELD PROJECTS</span>
+            </div>
+        </div>
+
+        <section class="section-shell" id="roadmap" aria-labelledby="roadmapTitle">
+            <div class="section-heading reveal">
+                <div>
+                    <p class="section-kicker">01 / LEARNING ROUTE</p>
+                    <h2 class="section-title" id="roadmapTitle">五段路，<br>构成一个闭环。</h2>
+                </div>
+                <p class="section-note">不是平铺十六个章节，而是沿着“理解 → 构建 → 增强 → 实战 → 交付”的能力生长路径推进。每一段都为下一段提供工具。</p>
+            </div>
+            <div class="roadmap reveal" id="roadmapGrid" aria-live="polite"></div>
+        </section>
+
+        <section class="archive-section" id="archive" aria-labelledby="archiveTitle">
+            <div class="section-shell">
+                <div class="section-heading reveal">
+                    <div>
+                        <p class="section-kicker">02 / KNOWLEDGE ARCHIVE</p>
+                        <h2 class="section-title" id="archiveTitle">16 章，不止<br>16 个入口。</h2>
+                    </div>
+                    <p class="section-note" id="archiveStats">正在扫描本地笔记目录…</p>
+                </div>
+                <div class="archive-tools reveal">
+                    <label class="search-box" for="chapterSearch">
+                        <span aria-hidden="true">⌕</span>
+                        <input id="chapterSearch" type="search" placeholder="搜索标题、摘要或知识阶段…" autocomplete="off">
+                        <span class="shortcut">/</span>
+                    </label>
+                    <div class="filter-list" id="filterList" aria-label="按学习阶段筛选"></div>
+                </div>
+                <div class="chapter-grid reveal" id="chapterGrid" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <section class="section-shell" id="practice" aria-labelledby="practiceTitle">
+            <div class="section-heading reveal">
+                <div>
+                    <p class="section-kicker">03 / FIELD NOTES</p>
+                    <h2 class="section-title" id="practiceTitle">从阅读，<br>走到作品。</h2>
+                </div>
+                <p class="section-note">后三章把前面的知识带入真实问题：有工具调用、有多智能体协作，也有可被验证和展示的完整成果。</p>
+            </div>
+            <div class="projects-grid reveal">
+                <article class="project-card featured">
+                    <span class="project-index">CASE 013 · MULTI-AGENT</span>
+                    <span class="project-symbol">旅 / 途</span>
+                    <h3>智能旅行助手</h3>
+                    <p>用角色分工、数据模型和 MCP 工具，把模糊需求变成可执行行程。</p>
+                    <button class="project-link" type="button" data-open-chapter="chapter-13">打开项目档案 →</button>
+                </article>
+                <article class="project-card">
+                    <span class="project-index">CASE 014 · RESEARCH</span>
+                    <span class="project-symbol">研</span>
+                    <h3>自动化深度研究</h3>
+                    <p>以 TODO 驱动动态研究流程，在发现中修正问题并形成报告。</p>
+                    <button class="project-link" type="button" data-open-chapter="chapter-14">查看研究方法 →</button>
+                </article>
+                <article class="project-card">
+                    <span class="project-index">CASE 015 · SOCIETY</span>
+                    <span class="project-symbol">城</span>
+                    <h3>构建赛博小镇</h3>
+                    <p>让多个智能体拥有身份、记忆与关系，观察群体行为如何涌现。</p>
+                    <button class="project-link" type="button" data-open-chapter="chapter-15">进入小镇档案 →</button>
+                </article>
+            </div>
+        </section>
+
+        <section class="assistant-section" id="assistant" aria-labelledby="assistantTitle">
+            <div class="section-shell assistant-layout">
+                <div class="reveal">
+                    <p class="section-kicker" style="color:var(--lime)">04 / SUPER AGENT WORKBENCH</p>
+                    <h2 class="assistant-title" id="assistantTitle">问。算。<br>推理。实践。</h2>
+                    <p class="assistant-copy">学习网站内置原有的超级智能体平台。你可以请它解释概念、做计算、比较范式，或把一个想法拆成行动步骤。</p>
+                    <div class="capability-chips" id="capabilityChips"></div>
+                </div>
+                <div class="chat-console reveal">
+                    <div class="chat-head"><span>SUPER_AGENT.EXE</span><span id="assistantStatus">CONNECTING…</span></div>
+                    <div class="chat-messages" id="chatMessages" aria-live="polite">
+                        <div class="message"><span class="message-label">超级智能体</span>学习工作台已就绪。你想从哪一个问题开始？</div>
+                    </div>
+                    <div class="quick-prompts">
+                        <button class="quick-prompt" type="button">解释 ReAct 的核心循环</button>
+                        <button class="quick-prompt" type="button">记忆与 RAG 有什么区别？</button>
+                        <button class="quick-prompt" type="button">帮我规划毕业设计</button>
+                    </div>
+                    <form class="chat-form" id="chatForm">
+                        <textarea id="messageInput" placeholder="输入问题；Ctrl + Enter 发送" aria-label="向超级智能体提问" required></textarea>
+                        <button class="send-button" id="sendButton" type="submit">发送 ↗</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-shell">
+            <p class="footer-title">学习不是收藏，<br>是不断重写理解。</p>
+            <p class="footer-meta">PERSONAL AGENT STUDY ARCHIVE<br>CONTENT SOURCE · /NOTES/*.MD<br>LOCAL FIRST · 2026</p>
+        </div>
+    </footer>
+
+    <section class="reader" id="reader" role="dialog" aria-modal="true" aria-hidden="true" aria-label="笔记阅读器" tabindex="-1">
+        <header class="reader-topbar">
+            <div class="reader-breadcrumb" id="readerBreadcrumb">ARCHIVE / NOTE</div>
+            <div class="reader-progress" id="readerProgress">READING 0%</div>
+            <div class="reader-actions">
+                <button class="icon-button" id="closeReader" type="button" aria-label="关闭阅读器">×</button>
+            </div>
+        </header>
+        <div class="reader-layout">
+            <aside class="reader-toc">
+                <p class="aside-label">ON THIS PAGE / 目录</p>
+                <nav class="toc-list" id="readerToc" aria-label="文章目录"></nav>
+            </aside>
+            <div class="reader-scroll" id="readerScroll">
+                <article class="article" id="articleContent"></article>
+            </div>
+            <aside class="reader-aside">
+                <p class="aside-label">NOTE DATA / 数据</p>
+                <div id="readerStats"></div>
+                <button class="complete-button" id="completeButton" type="button">标记为已完成</button>
+                <div class="reader-nav">
+                    <button id="previousChapter" type="button">← 上一章</button>
+                    <button id="nextChapter" type="button">下一章 →</button>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <script>
+        function loadCompletedChapters() {
+            try {
+                const stored = JSON.parse(localStorage.getItem('agent-study-completed') || '[]');
+                return new Set(Array.isArray(stored) ? stored.filter(item => typeof item === 'string') : []);
+            } catch (error) {
+                return new Set();
+            }
+        }
+
+        function saveCompletedChapters(completed) {
+            try {
+                localStorage.setItem('agent-study-completed', JSON.stringify([...completed]));
+            } catch (error) {
+                return false;
+            }
+            return true;
+        }
+
+        const state = {
+            learning: null,
+            platform: null,
+            filter: 'all',
+            query: '',
+            activeChapter: null,
+            completed: loadCompletedChapters(),
+            readerReturnFocus: null,
+        };
+
+        const $ = (id) => document.getElementById(id);
+
+        function escapeHtml(value = '') {
+            return String(value)
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#039;');
+        }
+
+        async function api(path, options = {}) {
+            const response = await fetch(path, {
+                headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
+                ...options,
+            });
+            const payload = await response.json();
+            if (!response.ok || payload.success === false) {
+                throw new Error(payload.error || `请求失败 (${response.status})`);
+            }
+            return payload;
+        }
+
+        function inlineMarkdown(value) {
+            return escapeHtml(value)
+                .replace(/`([^`]+)`/g, '<code>$1</code>')
+                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, label, url) => {
+                    const destination = url.trim();
+                    if (!/^(https?:\/\/|mailto:)/i.test(destination)) return label;
+                    return `<a href="${destination}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+                });
+        }
+
+        function renderMarkdown(markdown) {
+            const lines = markdown.replaceAll('\r\n', '\n').split('\n');
+            const output = [];
+            let index = 0;
+            let paragraph = [];
+
+            const flushParagraph = () => {
+                if (paragraph.length) {
+                    output.push(`<p>${inlineMarkdown(paragraph.join(' '))}</p>`);
+                    paragraph = [];
+                }
+            };
+
+            while (index < lines.length) {
+                const raw = lines[index];
+                const line = raw.trim();
+
+                if (line.startsWith('```')) {
+                    flushParagraph();
+                    const language = line.slice(3).trim() || 'code';
+                    const code = [];
+                    index += 1;
+                    while (index < lines.length && !lines[index].trim().startsWith('```')) {
+                        code.push(lines[index]);
+                        index += 1;
+                    }
+                    output.push(`<pre data-language="${escapeHtml(language)}"><button class="copy-code" type="button">COPY</button><code>${escapeHtml(code.join('\n'))}</code></pre>`);
+                    index += 1;
+                    continue;
+                }
+
+                if (!line) {
+                    flushParagraph();
+                    index += 1;
+                    continue;
+                }
+
+                const heading = line.match(/^(#{1,4})\s+(.+)$/);
+                if (heading) {
+                    flushParagraph();
+                    output.push(`<h${heading[1].length}>${inlineMarkdown(heading[2])}</h${heading[1].length}>`);
+                    index += 1;
+                    continue;
+                }
+
+                if (/^---+$/.test(line)) {
+                    flushParagraph();
+                    output.push('<hr>');
+                    index += 1;
+                    continue;
+                }
+
+                if (line.startsWith('>')) {
+                    flushParagraph();
+                    const quote = [];
+                    while (index < lines.length && lines[index].trim().startsWith('>')) {
+                        quote.push(lines[index].trim().replace(/^>\s?/, ''));
+                        index += 1;
+                    }
+                    output.push(`<blockquote>${inlineMarkdown(quote.join('<br>'))}</blockquote>`);
+                    continue;
+                }
+
+                if (line.includes('|') && index + 1 < lines.length && /^\s*\|?\s*:?-+/.test(lines[index + 1])) {
+                    flushParagraph();
+                    const tableLines = [line];
+                    index += 2;
+                    while (index < lines.length && lines[index].includes('|') && lines[index].trim()) {
+                        tableLines.push(lines[index].trim());
+                        index += 1;
+                    }
+                    const rows = tableLines.map(row => row.replace(/^\||\|$/g, '').split('|').map(cell => cell.trim()));
+                    const header = `<tr>${rows[0].map(cell => `<th>${inlineMarkdown(cell)}</th>`).join('')}</tr>`;
+                    const body = rows.slice(1).map(row => `<tr>${row.map(cell => `<td>${inlineMarkdown(cell)}</td>`).join('')}</tr>`).join('');
+                    output.push(`<div class="table-wrap"><table><thead>${header}</thead><tbody>${body}</tbody></table></div>`);
+                    continue;
+                }
+
+                const listMatch = line.match(/^([-*+] |\d+\. )(.+)$/);
+                if (listMatch) {
+                    flushParagraph();
+                    const ordered = /^\d/.test(listMatch[1]);
+                    const tag = ordered ? 'ol' : 'ul';
+                    const items = [];
+                    while (index < lines.length) {
+                        const match = lines[index].trim().match(/^([-*+] |\d+\. )(.+)$/);
+                        if (!match || /^\d/.test(match[1]) !== ordered) break;
+                        items.push(`<li>${inlineMarkdown(match[2])}</li>`);
+                        index += 1;
+                    }
+                    output.push(`<${tag}>${items.join('')}</${tag}>`);
+                    continue;
+                }
+
+                paragraph.push(line);
+                index += 1;
+            }
+
+            flushParagraph();
+            return output.join('\n');
+        }
+
+        function updateProgress() {
+            const total = state.learning?.stats.chapterCount || 16;
+            const completed = [...state.completed].filter(id => state.learning?.chapters.some(chapter => chapter.id === id)).length;
+            const percent = total ? Math.round(completed / total * 100) : 0;
+            $('completedCount').textContent = completed;
+            $('chapterCount').textContent = total;
+            $('progressPercent').textContent = `${percent}% COMPLETE`;
+            $('progressValue').style.width = `${percent}%`;
+        }
+
+        function renderRoadmap() {
+            $('roadmapGrid').innerHTML = state.learning.phases.map((phase, index) => `
+                <article class="phase-card">
+                    <div class="phase-top"><span>${escapeHtml(phase.kicker)}</span><span>0${index + 1}</span></div>
+                    <span class="phase-node" aria-hidden="true"></span>
+                    <p class="phase-number">${String(phase.range[0]).padStart(2, '0')}</p>
+                    <h3 class="phase-name">${escapeHtml(phase.name)}</h3>
+                    <p class="phase-description">${escapeHtml(phase.description)}</p>
+                    <p class="phase-range">CHAPTER ${String(phase.range[0]).padStart(2, '0')}—${String(phase.range[1]).padStart(2, '0')} · ${phase.chapterCount} NOTES</p>
+                </article>
+            `).join('');
+        }
+
+        function renderFilters() {
+            const filters = [{ id: 'all', name: '全部' }, ...state.learning.phases.map(phase => ({ id: phase.id, name: phase.name }))];
+            $('filterList').innerHTML = filters.map(filter => `
+                <button class="filter-button ${state.filter === filter.id ? 'active' : ''}" type="button" data-filter="${filter.id}">${escapeHtml(filter.name)}</button>
+            `).join('');
+        }
+
+        function renderChapters() {
+            const query = state.query.toLowerCase();
+            const chapters = state.learning.chapters.filter(chapter => {
+                const phaseMatch = state.filter === 'all' || chapter.phaseId === state.filter;
+                const searchText = `${chapter.title} ${chapter.summary} ${chapter.phaseName}`.toLowerCase();
+                return phaseMatch && (!query || searchText.includes(query));
+            });
+
+            if (!chapters.length) {
+                $('chapterGrid').innerHTML = '<div class="empty-state">没有找到对应笔记。试试更短的关键词。</div>';
+                return;
+            }
+
+            $('chapterGrid').innerHTML = chapters.map(chapter => `
+                <article class="chapter-card ${state.completed.has(chapter.id) ? 'complete' : ''}" tabindex="0" role="button" data-chapter-id="${chapter.id}" aria-label="阅读${escapeHtml(chapter.fullTitle)}">
+                    <div class="chapter-meta"><span>${escapeHtml(chapter.phaseName)}</span><span>${chapter.readingMinutes} MIN</span></div>
+                    <p class="chapter-number">${String(chapter.number).padStart(2, '0')}</p>
+                    <h3 class="chapter-title">${escapeHtml(chapter.title)}</h3>
+                    <p class="chapter-summary">${escapeHtml(chapter.summary)}</p>
+                    <div class="chapter-footer"><span>${chapter.sectionCount} 个主题</span><span>READ ↗</span></div>
+                </article>
+            `).join('');
+        }
+
+        async function loadLearning() {
+            const payload = await api('/api/learning');
+            state.learning = payload.data;
+            const stats = state.learning.stats;
+            $('readingTime').textContent = `${stats.readingMinutes} MIN READ`;
+            $('archiveStats').textContent = `共 ${stats.chapterCount} 章、${stats.sectionCount} 个主题、约 ${(stats.characters / 10000).toFixed(1)} 万字。所有内容直接读取自本地 notes 目录，修改笔记后刷新即可同步。`;
+            renderRoadmap();
+            renderFilters();
+            renderChapters();
+            updateProgress();
+        }
+
+        async function loadPlatform() {
+            try {
+                const payload = await api('/api/agent/status');
+                state.platform = payload.data;
+                $('assistantStatus').textContent = 'READY · LOCAL MODE';
+                const capabilities = state.platform.capabilities || [];
+                $('capabilityChips').innerHTML = capabilities.slice(0, 8).map(item => {
+                    const name = typeof item === 'string' ? item : (item.name || item.id || 'CAPABILITY');
+                    return `<span class="capability-chip">${escapeHtml(name)}</span>`;
+                }).join('');
+            } catch (error) {
+                $('assistantStatus').textContent = 'OFFLINE';
+                $('capabilityChips').innerHTML = '<span class="capability-chip">智能体暂不可用</span>';
+            }
+        }
+
+        function buildReaderToc() {
+            const headings = [...$('articleContent').querySelectorAll('h2, h3')];
+            const usedIds = new Set();
+            $('readerToc').innerHTML = headings.map((heading, index) => {
+                let id = `section-${index + 1}`;
+                while (usedIds.has(id)) id += '-x';
+                usedIds.add(id);
+                heading.id = id;
+                return `<a class="toc-link level-${heading.tagName.slice(1)}" href="#${id}" data-scroll-id="${id}">${escapeHtml(heading.textContent)}</a>`;
+            }).join('');
+        }
+
+        function updateCompleteButton() {
+            const done = state.activeChapter && state.completed.has(state.activeChapter.id);
+            $('completeButton').classList.toggle('done', done);
+            $('completeButton').textContent = done ? '已完成 ✓' : '标记为已完成';
+        }
+
+        async function openReader(chapterId) {
+            const reader = $('reader');
+            if (!reader.classList.contains('open')) {
+                state.readerReturnFocus = document.activeElement;
+            }
+            reader.classList.add('open');
+            reader.setAttribute('aria-hidden', 'false');
+            document.querySelectorAll('body > header, body > main, body > footer').forEach(element => {
+                element.inert = true;
+            });
+            document.body.classList.add('reader-open');
+            $('articleContent').innerHTML = '<p>正在从本地档案读取…</p>';
+            $('readerToc').innerHTML = '';
+
+            try {
+                const payload = await api(`/api/learning/${chapterId}`);
+                state.activeChapter = payload.data;
+                $('readerBreadcrumb').textContent = `ARCHIVE / ${payload.data.chapterLabel} / ${payload.data.title}`;
+                $('articleContent').innerHTML = renderMarkdown(payload.data.content);
+                $('readerStats').innerHTML = `
+                    <div class="reader-stat"><strong>${payload.data.readingMinutes}</strong><span>分钟预计阅读</span></div>
+                    <div class="reader-stat"><strong>${payload.data.sectionCount}</strong><span>个主要主题</span></div>
+                    <div class="reader-stat"><strong>${(payload.data.characters / 1000).toFixed(1)}k</strong><span>有效字符</span></div>
+                    <div class="reader-stat"><strong>${payload.data.updatedAt}</strong><span>最近整理</span></div>`;
+                $('previousChapter').disabled = !payload.data.previousId;
+                $('previousChapter').dataset.chapterId = payload.data.previousId || '';
+                $('nextChapter').disabled = !payload.data.nextId;
+                $('nextChapter').dataset.chapterId = payload.data.nextId || '';
+                $('readerScroll').scrollTop = 0;
+                $('readerProgress').textContent = 'READING 0%';
+                updateCompleteButton();
+                buildReaderToc();
+                $('closeReader').focus();
+            } catch (error) {
+                $('articleContent').innerHTML = `<h1>无法打开笔记</h1><p>${escapeHtml(error.message)}</p>`;
+                $('closeReader').focus();
+            }
+        }
+
+        function closeReader() {
+            $('reader').classList.remove('open');
+            $('reader').setAttribute('aria-hidden', 'true');
+            document.querySelectorAll('body > header, body > main, body > footer').forEach(element => {
+                element.inert = false;
+            });
+            document.body.classList.remove('reader-open');
+            state.activeChapter = null;
+            if (state.readerReturnFocus instanceof HTMLElement) {
+                state.readerReturnFocus.focus();
+            }
+            state.readerReturnFocus = null;
+        }
+
+        function toggleComplete() {
+            if (!state.activeChapter) return;
+            if (state.completed.has(state.activeChapter.id)) {
+                state.completed.delete(state.activeChapter.id);
+            } else {
+                state.completed.add(state.activeChapter.id);
+            }
+            saveCompletedChapters(state.completed);
+            updateCompleteButton();
+            updateProgress();
+            renderChapters();
+        }
+
+        function addChatMessage(role, content) {
+            const message = document.createElement('div');
+            message.className = `message ${role === 'user' ? 'user' : ''}`;
+            message.innerHTML = `<span class="message-label">${role === 'user' ? '你' : '超级智能体'}</span>${escapeHtml(content)}`;
+            $('chatMessages').appendChild(message);
+            $('chatMessages').scrollTop = $('chatMessages').scrollHeight;
+            return message;
+        }
+
+        async function sendMessage(message) {
+            if (!message.trim()) return;
+            addChatMessage('user', message.trim());
+            const waiting = addChatMessage('assistant', '正在组织回答…');
+            $('sendButton').disabled = true;
+            try {
+                const payload = await api('/api/agent/chat', {
+                    method: 'POST',
+                    body: JSON.stringify({ message: message.trim(), mode: 'auto', use_real_ai: false }),
+                });
+                waiting.innerHTML = `<span class="message-label">超级智能体</span>${escapeHtml(payload.answer || '已完成处理。')}`;
+            } catch (error) {
+                waiting.innerHTML = `<span class="message-label">系统提示</span>${escapeHtml(error.message)}`;
+            } finally {
+                $('sendButton').disabled = false;
+                $('chatMessages').scrollTop = $('chatMessages').scrollHeight;
+            }
+        }
+
+        function bindEvents() {
+            $('filterList').addEventListener('click', event => {
+                const button = event.target.closest('[data-filter]');
+                if (!button) return;
+                state.filter = button.dataset.filter;
+                renderFilters();
+                renderChapters();
+            });
+
+            $('chapterSearch').addEventListener('input', event => {
+                state.query = event.target.value.trim();
+                renderChapters();
+            });
+
+            $('chapterGrid').addEventListener('click', event => {
+                const card = event.target.closest('[data-chapter-id]');
+                if (card) openReader(card.dataset.chapterId);
+            });
+
+            $('chapterGrid').addEventListener('keydown', event => {
+                if (event.key !== 'Enter' && event.key !== ' ') return;
+                const card = event.target.closest('[data-chapter-id]');
+                if (card) {
+                    event.preventDefault();
+                    openReader(card.dataset.chapterId);
+                }
+            });
+
+            document.querySelectorAll('[data-open-chapter]').forEach(button => {
+                button.addEventListener('click', () => openReader(button.dataset.openChapter));
+            });
+
+            $('searchTrigger').addEventListener('click', () => {
+                location.hash = '#archive';
+                setTimeout(() => $('chapterSearch').focus(), 300);
+            });
+
+            $('closeReader').addEventListener('click', closeReader);
+            $('completeButton').addEventListener('click', toggleComplete);
+            $('previousChapter').addEventListener('click', event => openReader(event.currentTarget.dataset.chapterId));
+            $('nextChapter').addEventListener('click', event => openReader(event.currentTarget.dataset.chapterId));
+
+            $('readerToc').addEventListener('click', event => {
+                const link = event.target.closest('[data-scroll-id]');
+                if (!link) return;
+                event.preventDefault();
+                document.getElementById(link.dataset.scrollId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
+            $('articleContent').addEventListener('click', async event => {
+                const button = event.target.closest('.copy-code');
+                if (!button) return;
+                try {
+                    await navigator.clipboard.writeText(button.parentElement.querySelector('code').textContent);
+                    button.textContent = 'COPIED';
+                } catch (error) {
+                    button.textContent = 'COPY FAILED';
+                }
+                setTimeout(() => { button.textContent = 'COPY'; }, 1200);
+            });
+
+            $('readerScroll').addEventListener('scroll', event => {
+                const element = event.currentTarget;
+                const range = element.scrollHeight - element.clientHeight;
+                const percent = range > 0 ? Math.round(element.scrollTop / range * 100) : 100;
+                $('readerProgress').textContent = `READING ${percent}%`;
+            });
+
+            $('chatForm').addEventListener('submit', event => {
+                event.preventDefault();
+                const input = $('messageInput');
+                const message = input.value;
+                input.value = '';
+                sendMessage(message);
+            });
+
+            $('messageInput').addEventListener('keydown', event => {
+                if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
+                    event.preventDefault();
+                    $('chatForm').requestSubmit();
+                }
+            });
+
+            document.querySelectorAll('.quick-prompt').forEach(button => {
+                button.addEventListener('click', () => sendMessage(button.textContent));
+            });
+
+            document.addEventListener('keydown', event => {
+                if (event.key === 'Escape' && $('reader').classList.contains('open')) closeReader();
+                if (event.key === 'Tab' && $('reader').classList.contains('open')) {
+                    const focusable = [...$('reader').querySelectorAll('a[href], button:not(:disabled), [tabindex]:not([tabindex="-1"])')]
+                        .filter(element => !element.hidden);
+                    if (focusable.length) {
+                        const first = focusable[0];
+                        const last = focusable[focusable.length - 1];
+                        if (event.shiftKey && document.activeElement === first) {
+                            event.preventDefault();
+                            last.focus();
+                        } else if (!event.shiftKey && document.activeElement === last) {
+                            event.preventDefault();
+                            first.focus();
+                        }
+                    }
+                }
+                if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+                    event.preventDefault();
+                    location.hash = '#archive';
+                    setTimeout(() => $('chapterSearch').focus(), 200);
+                }
+            });
+        }
+
+        function setupReveal() {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
+        }
+
+        async function initialize() {
+            bindEvents();
+            setupReveal();
+            try {
+                await Promise.all([loadLearning(), loadPlatform()]);
+            } catch (error) {
+                $('chapterGrid').innerHTML = `<div class="empty-state">加载学习档案失败：${escapeHtml(error.message)}</div>`;
+            } finally {
+                setTimeout(() => $('loadingScreen').classList.add('hidden'), 260);
+            }
+        }
+
+        initialize();
+    </script>
+</body>
+</html>
